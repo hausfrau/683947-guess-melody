@@ -2,6 +2,23 @@
 
 const RIGHT_ARROW = 39;
 const LEFT_ARROW = 37;
+const BEFORE_END = `beforeEnd`;
+const ARROW_WRAP_HTML = `<div class="arrows__wrap"> <style>  
+.arrows__wrap { 
+  position: absolute; 
+  top: 135px;
+  left: 50%;
+  margin-left: -56px;
+}
+.arrows__btn {
+  background: none;
+  border: 2px solid black;
+  padding: 5px 20px;
+}
+</style>
+<button class="arrows__btn"><-</button>
+  <button class="arrows__btn">-></button>
+</div>`;
 
 const app = document.querySelector(`.app`);
 const main = app.querySelector(`.main`);
@@ -11,7 +28,9 @@ const screens = Array.from(template.content.querySelectorAll(`section.main`)).ma
 let currentScreen = 0;
 
 const swap = (left, right) => {
-  screens[left] = screens.splice(right, 1, screens[left])[0];
+  const temp = screens[left];
+  screens[left] = screens[right];
+  screens[right] = temp;
 };
 
 const getScreen = (ind) => {
@@ -49,31 +68,16 @@ document.addEventListener(`keydown`, (evt) => {
   }
 });
 
-const createButton = (directionLeft) => {
-  const button = document.createElement(`button`);
-  button.classList.add(`arrows__btn`);
-  button.style.background = `none`;
-  button.innerText = directionLeft ? `<-` : `->`;
-  button.style.border = `2px solid black`;
-  button.style.padding = `5px 20px`;
-  button.addEventListener(`click`, directionLeft ? onLeftArrowButtonClick : onRightArrowButtonClick);
-  return button;
+const addButtons = () => app.insertAdjacentHTML(BEFORE_END, ARROW_WRAP_HTML);
+
+const bindButtonsListeners = () => {
+  const buttons = app.querySelectorAll(`.arrows__btn`);
+  buttons.forEach((it, index) => {
+    it.addEventListener(`click`, index ? onRightArrowButtonClick : onLeftArrowButtonClick);
+  });
 };
 
-const createArrowsWrap = () => {
-  const arrowsWrap = document.createElement(`div`);
-  arrowsWrap.classList.add(`arrows__wrap`);
-  arrowsWrap.style.position = `absolute`;
-  arrowsWrap.style.top = `135px`;
-  arrowsWrap.style.left = `50%`;
-  arrowsWrap.style.marginLeft = `-56px`;
-
-  arrowsWrap.appendChild(createButton(true));
-  arrowsWrap.appendChild(createButton(false));
-
-  app.appendChild(arrowsWrap);
-};
-
-createArrowsWrap();
 swap(1, 2);
 selectScreen(0);
+addButtons();
+bindButtonsListeners();
