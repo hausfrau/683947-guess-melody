@@ -72,4 +72,5 @@ playAgain.addEventListener(`click`, () => appendScreen(artistWelcome));
 
 Array.from(levelArtistScreen.querySelectorAll(`.main-answer`)).forEach((it) => it.addEventListener(`click`, () => appendScreen(levelGenre)));
 
+
 export default levelArtistScreen;

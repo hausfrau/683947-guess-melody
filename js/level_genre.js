@@ -113,4 +113,5 @@ Array.from(levelGenreScreen.querySelectorAll(`input`)).forEach((it) => it.addEve
 playAgain.addEventListener(`click`, () => appendScreen(genreWelcome));
 answerSend.addEventListener(`click`, () => appendScreen(randomResult));
 
+
 export default levelGenreScreen;

@@ -14,4 +14,5 @@ const replay = timeOverScreen.querySelector(`.main-replay`);
 
 replay.addEventListener(`click`, () => appendScreen(timeOverWelcome));
 
+
 export default timeOverScreen;

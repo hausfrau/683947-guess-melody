@@ -14,4 +14,5 @@ const replay = attemptsOverScreen.querySelector(`.main-replay`);
 
 replay.addEventListener(`click`, () => appendScreen(attemptsOverWelcome));
 
+
 export default attemptsOverScreen;

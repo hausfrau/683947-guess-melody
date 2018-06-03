@@ -17,4 +17,5 @@ const replay = resultScreen.querySelector(`.main-replay`);
 
 replay.addEventListener(`click`, () => appendScreen(resultWelcome));
 
+
 export default resultScreen;
